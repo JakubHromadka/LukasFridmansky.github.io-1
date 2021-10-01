@@ -35,22 +35,22 @@ let snakeLength;
 let score;
 let best_score = 0;
 
-if (localStorage.getItem("best_score") !== null){
+if (localStorage.getItem("best_score") !== null) {
     best_score = (localStorage.getItem("best_score"))
-    if (best_score > 9){
+    if (best_score > 9) {
         best_score_num.textContent = best_score;
-    }
-    else{
-        best_score_num.textContent ='0' + best_score;
+    } else {
+        best_score_num.textContent = '0' + best_score;
     }
 }
-function checkWindowSize(){
-    if (!gameIsRunning){
+
+function checkWindowSize() {
+    if (!gameIsRunning) {
         playAgain();
         return;
     }
     gameIsRunning = false;
-    if (window.innerWidth > 750 && window.innerHeight > 850){
+    if (window.innerWidth > 750 && window.innerHeight > 850) {
         canvas.width = 688;
         canvas.height = 688;
         tileSize = 43;
@@ -67,8 +67,8 @@ function checkWindowSize(){
         tail = [];
         snakeLength = 4;
         score = 0;
-    } 
-    if ((window.innerWidth > 600 && window.innerWidth <= 750) || (window.innerHeight > 700 && window.innerHeight <= 850)){
+    }
+    if ((window.innerWidth > 600 && window.innerWidth <= 750) || (window.innerHeight > 700 && window.innerHeight <= 850)) {
         canvas.width = 540;
         canvas.height = 540;
         tileSize = 36;
@@ -86,7 +86,7 @@ function checkWindowSize(){
         snakeLength = 4;
         score = 0;
     }
-    if ((window.innerWidth > 530 && window.innerWidth <= 600) || (window.innerHeight > 625 && window.innerHeight <= 700)){
+    if ((window.innerWidth > 530 && window.innerWidth <= 600) || (window.innerHeight > 625 && window.innerHeight <= 700)) {
         canvas.width = 480;
         canvas.height = 480;
         tileSize = 32;
@@ -104,7 +104,7 @@ function checkWindowSize(){
         snakeLength = 3;
         score = 0;
     }
-    if ((window.innerWidth > 400 && window.innerWidth <= 530) || (window.innerHeight > 475 && window.innerHeight <= 625)){
+    if ((window.innerWidth > 400 && window.innerWidth <= 530) || (window.innerHeight > 475 && window.innerHeight <= 625)) {
         canvas.width = 360;
         canvas.height = 360;
         tileSize = 24;
@@ -122,7 +122,7 @@ function checkWindowSize(){
         snakeLength = 3;
         score = 0;
     }
-    if ((window.innerWidth <= 400) || (window.innerHeight <= 625)){
+    if ((window.innerWidth <= 400) || (window.innerHeight <= 625)) {
         canvas.width = 270;
         canvas.height = 270;
         tileSize = 18;
@@ -143,8 +143,9 @@ function checkWindowSize(){
     gameIsRunning = true;
 }
 checkWindowSize();
-function gameLoop(){
-    if(gameIsRunning){
+
+function gameLoop() {
+    if (gameIsRunning) {
         drawEverything();
         moveEverything();
         //console.log(window.innerWidth);
@@ -155,47 +156,44 @@ function gameLoop(){
 resetFood();
 gameLoop();
 
-function rectangle(color, x, y, width, height){
+function rectangle(color, x, y, width, height) {
     ctx.fillStyle = color;
     ctx.fillRect(x, y, width, height);
 }
 
-function drawGrid(){
-    for (let i = 0; i < tileCountX; i++){
-        for (let j = 0; j < tileCountY; j++){
-            if ((i === tileCountX - 1) & (j === tileCountY - 1)){
-                rectangle('#373943', (tileSize * i), (tileSize * j), tileSize, tileSize);   
-            }
-            else if (i === tileCountX - 1){
-                rectangle('#373943', (tileSize * i), (tileSize * j), tileSize, tileSize - 0.3);   
-            }
-            else if (j === tileCountY - 1){
-                rectangle('#373943', (tileSize * i), (tileSize * j), tileSize - 0.3, tileSize);   
-            }
-            else{
-                rectangle('#373943', (tileSize * i), (tileSize * j), tileSize - 0.3, tileSize - 0.3);   
+function drawGrid() {
+    for (let i = 0; i < tileCountX; i++) {
+        for (let j = 0; j < tileCountY; j++) {
+            if ((i === tileCountX - 1) & (j === tileCountY - 1)) {
+                rectangle('#1C1C1C', (tileSize * i), (tileSize * j), tileSize, tileSize);
+            } else if (i === tileCountX - 1) {
+                rectangle('#1C1C1C', (tileSize * i), (tileSize * j), tileSize, tileSize - 0.3);
+            } else if (j === tileCountY - 1) {
+                rectangle('#1C1C1C', (tileSize * i), (tileSize * j), tileSize - 0.3, tileSize);
+            } else {
+                rectangle('#1C1C1C', (tileSize * i), (tileSize * j), tileSize - 0.3, tileSize - 0.3);
             }
         }
     }
 }
 
-function drawEverything(){
+function drawEverything() {
     //background:
     rectangle('#E5E5E5', 0, 0, canvas.width, canvas.height);
     drawGrid();
 
     //food:
-    rectangle('#4D8B31', foodPosX + indentation, foodPosY + indentation, tileSize - indentation*2 - 1, tileSize - indentation*2 - 1)
+    rectangle('#4D8B31', foodPosX + indentation, foodPosY + indentation, tileSize - indentation * 2 - 1, tileSize - indentation * 2 - 1)
 
     tail.forEach((snakePart) =>
-		rectangle("#B5B5B5", snakePart.x + indentation, snakePart.y + indentation, tileSize - indentation*2 - 1, tileSize - indentation*2 - 1)
+        rectangle("#B5B5B5", snakePart.x + indentation, snakePart.y + indentation, tileSize - indentation * 2 - 1, tileSize - indentation * 2 - 1)
     );
 
     //snake:
-    rectangle('#DCDCDC', snakePosX + indentation, snakePosY + indentation, tileSize - indentation*2 - 1, tileSize - indentation*2 - 1);
+    rectangle('#DCDCDC', snakePosX + indentation, snakePosY + indentation, tileSize - indentation * 2 - 1, tileSize - indentation * 2 - 1);
 }
 
-function moveEverything(){
+function moveEverything() {
     snakePosX += snakeSpeed * velocityX
     snakePosY += snakeSpeed * velocityY
 
@@ -214,49 +212,47 @@ function moveEverything(){
     }
 
     // game over:
-	tail.forEach((snakePart) => {
-		if (snakePosX === snakePart.x && snakePosY === snakePart.y) {
-			gameOver();
-		}
-	});
+    tail.forEach((snakePart) => {
+        if (snakePosX === snakePart.x && snakePosY === snakePart.y) {
+            gameOver();
+        }
+    });
 
     tail.push({ x: snakePosX, y: snakePosY });
 
     tail = tail.slice(-1 * snakeLength);
 
     //food collision:
-	if (snakePosX === foodPosX && snakePosY === foodPosY) {
+    if (snakePosX === foodPosX && snakePosY === foodPosY) {
         snakeLength += 0.5;
         fps += 0.1;
         score += 1;
-		resetFood();
-        if (score > 9){
+        resetFood();
+        if (score > 9) {
             score_num.textContent = score;
+        } else {
+            score_num.textContent = '0' + score;
         }
-        else{
-            score_num.textContent ='0' + score;
-        }
-        if (score > best_score){
+        if (score > best_score) {
             best_score = score;
-            if (score > 9){
+            if (score > 9) {
                 best_score_num.textContent = best_score;
-            }
-            else{
-                best_score_num.textContent ='0' + best_score;
+            } else {
+                best_score_num.textContent = '0' + best_score;
             }
             localStorage.setItem("best_score", best_score)
         }
-	}
+    }
 }
 
-function resetFood(){
+function resetFood() {
     foodPosX = Math.floor(Math.random() * tileCountX) * tileSize;
     foodPosY = Math.floor(Math.random() * tileCountY) * tileSize;
 
     if (foodPosX === snakePosX && foodPosY === snakePosY) {
         resetFood();
     }
-    
+
     if (
         tail.some(
             (snakePart) => snakePart.x === foodPosX && snakePart.y === foodPosY
@@ -266,12 +262,12 @@ function resetFood(){
     }
 }
 
-function gameOver(){
+function gameOver() {
     gameIsRunning = false;
     game_over_text.classList.add('active')
 }
 
-function playAgain(){
+function playAgain() {
     resetFood();
     snakePosX = 0;
     snakePosY = (canvas.height - tileSize) / 2;
@@ -287,7 +283,7 @@ function playAgain(){
     snakeLength = 3;
     score_num.textContent = '00';
 
-    if (!gameIsRunning){
+    if (!gameIsRunning) {
         gameIsRunning = true;
         gameLoop();
     }
@@ -295,12 +291,13 @@ function playAgain(){
     checkWindowSize();
 }
 
-function touchStart(event){
+function touchStart(event) {
     xPositionStart = event.touches[0].clientX;
     yPositionStart = event.touches[0].clientY;
     //console.log(xPositionStart, yPositionStart);
 }
-function touchEnd(event){
+
+function touchEnd(event) {
     //console.log(event.changedTouches);
     xPositionEnd = event.changedTouches[0].clientX;
     yPositionEnd = event.changedTouches[0].clientY;
@@ -308,94 +305,87 @@ function touchEnd(event){
     changeVelocity();
 }
 
-function changeVelocity(){
+function changeVelocity() {
     xPositionDifference = xPositionStart - xPositionEnd;
     yPositionDifference = yPositionStart - yPositionEnd;
 
-    if (xPositionDifference != 0 || yPositionDifference != 0){
-        if (yPositionDifference == 0){
-            if (xPositionDifference < 0){
-                if (velocityX !== -1){
+    if (xPositionDifference != 0 || yPositionDifference != 0) {
+        if (yPositionDifference == 0) {
+            if (xPositionDifference < 0) {
+                if (velocityX !== -1) {
                     velocityX = 1;
                     velocityY = 0
                 }
-            }
-            else if (xPositionDifference > 0){
-                if (velocityX !== 1){
+            } else if (xPositionDifference > 0) {
+                if (velocityX !== 1) {
                     velocityX = -1;
                     velocityY = 0
                 }
             }
-        }
-        else if (xPositionDifference < 0){
-            if (yPositionDifference < 0){
-                if (xPositionDifference*-1 < yPositionDifference*-1){
-                    if (velocityY !== -1){
+        } else if (xPositionDifference < 0) {
+            if (yPositionDifference < 0) {
+                if (xPositionDifference * -1 < yPositionDifference * -1) {
+                    if (velocityY !== -1) {
                         velocityY = 1;
                         velocityX = 0
                     }
                 }
-                if (xPositionDifference*-1 > yPositionDifference*-1){
-                    if (velocityX !== -1){
+                if (xPositionDifference * -1 > yPositionDifference * -1) {
+                    if (velocityX !== -1) {
+                        velocityX = 1;
+                        velocityY = 0
+                    }
+                }
+            } else if (yPositionDifference > 0) {
+                if (xPositionDifference * -1 < yPositionDifference) {
+                    if (velocityY !== 1) {
+                        velocityY = -1;
+                        velocityX = 0
+                    }
+                }
+                if (xPositionDifference * -1 > yPositionDifference) {
+                    if (velocityX !== -1) {
                         velocityX = 1;
                         velocityY = 0
                     }
                 }
             }
-            else if (yPositionDifference > 0){
-                if (xPositionDifference*-1 < yPositionDifference){
-                    if (velocityY !== 1){
-                        velocityY = -1;
-                        velocityX = 0
-                    }
-                }
-                if (xPositionDifference*-1 > yPositionDifference){
-                    if (velocityX !== -1){
-                        velocityX = 1;
-                        velocityY = 0
-                    }
-                }
-            }
-        }
-        else if (xPositionDifference > 0){
-            if (yPositionDifference < 0){
-                if (xPositionDifference < yPositionDifference*-1){
-                    if (velocityY !== -1){
+        } else if (xPositionDifference > 0) {
+            if (yPositionDifference < 0) {
+                if (xPositionDifference < yPositionDifference * -1) {
+                    if (velocityY !== -1) {
                         velocityY = 1;
                         velocityX = 0
                     }
                 }
-                if (xPositionDifference > yPositionDifference*-1){
-                    if (velocityX !== 1){
+                if (xPositionDifference > yPositionDifference * -1) {
+                    if (velocityX !== 1) {
                         velocityX = -1;
                         velocityY = 0
                     }
                 }
-            }
-            else if (yPositionDifference > 0){
-                if (xPositionDifference < yPositionDifference){
-                    if (velocityY !== 1){
+            } else if (yPositionDifference > 0) {
+                if (xPositionDifference < yPositionDifference) {
+                    if (velocityY !== 1) {
                         velocityY = -1;
                         velocityX = 0
                     }
                 }
-                if (xPositionDifference > yPositionDifference){
-                    if (velocityX !== 1){
+                if (xPositionDifference > yPositionDifference) {
+                    if (velocityX !== 1) {
                         velocityX = -1;
                         velocityY = 0
                     }
                 }
             }
-        }
-        else if (xPositionDifference == 0){
-            if (yPositionDifference < 0){
-                if (velocityY !== -1){
+        } else if (xPositionDifference == 0) {
+            if (yPositionDifference < 0) {
+                if (velocityY !== -1) {
                     velocityY = 1;
                     velocityX = 0
                 }
-            }
-            else if (yPositionDifference > 0){
-                if (velocityY !== 1){
+            } else if (yPositionDifference > 0) {
+                if (velocityY !== 1) {
                     velocityY = -1;
                     velocityX = 0
                 }
@@ -406,28 +396,28 @@ function changeVelocity(){
 
 //keyboard:
 
-function keyPush(event){
-    switch (event.key){
+function keyPush(event) {
+    switch (event.key) {
         case 'ArrowLeft':
-            if (velocityX !== 1){
+            if (velocityX !== 1) {
                 velocityX = -1;
                 velocityY = 0
             }
             break;
         case 'ArrowRight':
-            if (velocityX !== -1){
+            if (velocityX !== -1) {
                 velocityX = 1;
                 velocityY = 0
             }
             break;
         case 'ArrowUp':
-            if (velocityY !== 1){
+            if (velocityY !== 1) {
                 velocityY = -1;
                 velocityX = 0
             }
             break;
         case 'ArrowDown':
-            if (velocityY !== -1){
+            if (velocityY !== -1) {
                 velocityY = 1;
                 velocityX = 0
             }

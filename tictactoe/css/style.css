@@ -1,274 +1,274 @@
-    *,
-    *::after,
-    *::before {
-        box-sizing: border-box;
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+ :root {
+    --cell-size: 150px;
+    --mark-size: calc(var(--cell-size) * .9);
+}
+
+body {
+    margin: 0;
+    background: #1C1C1C;
+    font-family: 'Langar', cursive;
+    overflow-x: hidden;
+}
+
+.board {
+    width: 100vw;
+    height: 90vh;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3, auto)
+}
+
+.cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border: 1px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3) {
+    border-top: none;
+}
+
+.cell:nth-child(3n + 1) {
+    border-left: none;
+}
+
+.cell:nth-child(3n + 3) {
+    border-right: none;
+}
+
+.cell:last-child,
+.cell:nth-child(8),
+.cell:nth-child(7) {
+    border-bottom: none;
+}
+
+.cell.x::before,
+.cell.x::after,
+.cell.circle::before {
+    background-color: #fff;
+}
+
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after,
+.board.circle .cell:not(.x):not(.circle):hover::before {
+    background-color: rgb(184, 184, 184);
+}
+
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after {
+    content: '';
+    position: absolute;
+    width: calc(var(--mark-size) * .15);
+    height: var(--mark-size);
+}
+
+.cell.x::before,
+.board.x .cell:not(.x):not(.circle):hover::before {
+    transform: rotate(45deg);
+}
+
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::after {
+    transform: rotate(-45deg);
+}
+
+.cell.circle::before,
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::before,
+.board.circle .cell:not(.x):not(.circle):hover::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+}
+
+.cell.circle::before,
+.board.circle .cell:not(.x):not(.circle):hover::before {
+    width: calc(var(--mark-size)*.85);
+    height: calc(var(--mark-size)*.85);
+}
+
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::after {
+    width: calc(var(--mark-size) * .58);
+    height: calc(var(--mark-size) * .58);
+    background-color: #1C1C1C;
+}
+
+.top-panel {
+    position: absolute;
+    font-style: 15px;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    margin-left: 5px;
+}
+
+.restart {
+    position: absolute;
+    right: 0;
+    margin-right: 25px;
+    margin-top: 5px;
+    color: #fff;
+    font-size: 25px;
+    padding: 5px;
+    padding-bottom: 0;
+    cursor: pointer;
+}
+
+.winner {
+    width: 500px;
+    font-size: 35px;
+    color: #fff;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: 0 auto;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.right,
+.left {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    color: #fff;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    font-size: 35px;
+}
+
+.right {
+    right: 0;
+    margin-top: 80px;
+    margin-right: 150px;
+}
+
+.left {
+    left: 0;
+    margin-top: 80px;
+    margin-left: 150px;
+}
+
+.score {
+    color: #fff;
+    width: 400px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+
+.score img {
+    width: 20px;
+}
+
+.players {
+    width: 90%;
+    display: flex;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    justify-content: space-between;
+}
+
+.players-score {
+    display: flex;
+    justify-content: space-around;
+    margin-left: -5px;
+    font-size: 45px;
+    margin-top: -20px;
+}
+
+.player1.active,
+.player2.active,
+.score_player_1.active,
+.score_player_2.active {
+    color: rgb(184, 184, 184);
+}
+
+.item {
+    width: 50px;
+}
+
+@media only screen and (max-width: 1000px) {
+    .right {
+        margin-right: 50px;
     }
-    
-     :root {
-        --cell-size: 150px;
-        --mark-size: calc(var(--cell-size) * .9);
+    .left {
+        margin-left: 50px;
     }
-    
-    body {
-        margin: 0;
-        background: #1C1C1C;
-        font-family: 'Langar', cursive;
-        overflow-x: hidden;
-    }
-    
-    .board {
-        width: 100vw;
-        height: 90vh;
-        display: grid;
-        justify-content: center;
-        align-content: center;
-        justify-items: center;
-        align-items: center;
-        grid-template-columns: repeat(3, auto)
-    }
-    
-    .cell {
-        width: var(--cell-size);
-        height: var(--cell-size);
-        border: 1px solid #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        cursor: pointer;
-    }
-    
-    .cell:first-child,
-    .cell:nth-child(2),
-    .cell:nth-child(3) {
-        border-top: none;
-    }
-    
-    .cell:nth-child(3n + 1) {
-        border-left: none;
-    }
-    
-    .cell:nth-child(3n + 3) {
-        border-right: none;
-    }
-    
-    .cell:last-child,
-    .cell:nth-child(8),
-    .cell:nth-child(7) {
-        border-bottom: none;
-    }
-    
-    .cell.x::before,
-    .cell.x::after,
-    .cell.circle::before {
-        background-color: #fff;
-    }
-    
-    .board.x .cell:not(.x):not(.circle):hover::before,
-    .board.x .cell:not(.x):not(.circle):hover::after,
-    .board.circle .cell:not(.x):not(.circle):hover::before {
-        background-color: rgb(184, 184, 184);
-    }
-    
-    .cell.x::before,
-    .cell.x::after,
-    .board.x .cell:not(.x):not(.circle):hover::before,
-    .board.x .cell:not(.x):not(.circle):hover::after {
-        content: '';
-        position: absolute;
-        width: calc(var(--mark-size) * .15);
-        height: var(--mark-size);
-    }
-    
-    .cell.x::before,
-    .board.x .cell:not(.x):not(.circle):hover::before {
-        transform: rotate(45deg);
-    }
-    
-    .cell.x::after,
-    .board.x .cell:not(.x):not(.circle):hover::after {
-        transform: rotate(-45deg);
-    }
-    
-    .cell.circle::before,
-    .cell.circle::after,
-    .board.circle .cell:not(.x):not(.circle):hover::before,
-    .board.circle .cell:not(.x):not(.circle):hover::after {
-        content: '';
-        position: absolute;
-        border-radius: 50%;
-    }
-    
-    .cell.circle::before,
-    .board.circle .cell:not(.x):not(.circle):hover::before {
-        width: calc(var(--mark-size)*.85);
-        height: calc(var(--mark-size)*.85);
-    }
-    
-    .cell.circle::after,
-    .board.circle .cell:not(.x):not(.circle):hover::after {
-        width: calc(var(--mark-size) * .58);
-        height: calc(var(--mark-size) * .58);
-        background-color: #1C1C1C;
-    }
-    
-    .top-panel {
-        position: absolute;
-        font-style: 15px;
-        top: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        height: 50px;
-        display: flex;
-        margin-left: 5px;
-    }
-    
-    .restart {
-        position: absolute;
-        right: 0;
-        margin-right: 25px;
-        margin-top: 5px;
-        color: #fff;
-        font-size: 25px;
-        padding: 5px;
-        padding-bottom: 0;
-        cursor: pointer;
-    }
-    
-    .winner {
-        width: 500px;
-        font-size: 35px;
-        color: #fff;
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        margin: 0 auto;
-        margin-top: 5px;
-        text-align: center;
-    }
-    
+}
+
+@media only screen and (max-width: 700px),
+(max-height: 520px) {
     .right,
     .left {
-        writing-mode: vertical-rl;
-        text-orientation: upright;
-        color: #fff;
-        cursor: pointer;
-        position: absolute;
-        top: 0;
-        font-size: 35px;
+        display: none;
     }
-    
-    .right {
-        right: 0;
-        margin-top: 80px;
-        margin-right: 150px;
-    }
-    
+}
+
+@media only screen and (max-height: 660px) {
+    .right,
     .left {
-        left: 0;
-        margin-top: 80px;
-        margin-left: 150px;
+        font-size: 25px;
     }
-    
+}
+
+@media only screen and (max-width: 500px),
+(max-height: 660px) {
     .score {
-        color: #fff;
-        width: 400px;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: 0 auto;
+        font-size: 10px;
+        width: 250px;
+        margin-bottom: 50px;
     }
-    
-    .score img {
-        width: 20px;
-    }
-    
-    .players {
-        width: 90%;
-        display: flex;
-        margin: 0 auto;
-        margin-bottom: 20px;
-        justify-content: space-between;
-    }
-    
     .players-score {
+        font-size: 20px;
         display: flex;
         justify-content: space-around;
-        margin-left: -5px;
-        font-size: 45px;
-        margin-top: -20px;
     }
-    
-    .player1.active,
-    .player2.active,
-    .score_player_1.active,
-    .score_player_2.active {
-        color: rgb(184, 184, 184);
-    }
-    
     .item {
-        width: 50px;
+        width: 22px;
     }
-    
-    @media only screen and (max-width: 1000px) {
-        .right {
-            margin-right: 50px;
-        }
-        .left {
-            margin-left: 50px;
-        }
+     :root {
+        --cell-size: 100px;
+        --mark-size: calc(var(--cell-size) * .9);
     }
-    
-    @media only screen and (max-width: 700px),
-    (max-height: 520px) {
-        .right,
-        .left {
-            display: none;
-        }
+    .winner {
+        font-size: 20px;
+        margin-top: 20px;
+        width: 200px;
     }
-    
-    @media only screen and (max-height: 660px) {
-        .right,
-        .left {
-            font-size: 25px;
-        }
+    .restart {
+        font-size: 20px;
+        margin-top: 15px;
     }
-    
-    @media only screen and (max-width: 500px),
-    (max-height: 660px) {
-        .score {
-            font-size: 10px;
-            width: 250px;
-            margin-bottom: 50px;
-        }
-        .players-score {
-            font-size: 20px;
-            display: flex;
-            justify-content: space-around;
-        }
-        .item {
-            width: 22px;
-        }
-         :root {
-            --cell-size: 100px;
-            --mark-size: calc(var(--cell-size) * .9);
-        }
-        .winner {
-            font-size: 20px;
-            margin-top: 20px;
-            width: 200px;
-        }
-        .restart {
-            font-size: 20px;
-            margin-top: 15px;
-        }
+}
+
+@media only screen and (max-height: 520px) {
+    .score {
+        margin-bottom: 10px;
     }
-    
-    @media only screen and (max-height: 520px) {
-        .score {
-            margin-bottom: 10px;
-        }
-    }
+}
