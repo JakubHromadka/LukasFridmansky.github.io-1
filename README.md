@@ -1,2 +1,2 @@
 Snake game: <a href="https://lukasfridmansky.github.io/snakegame/">https://lukasfridmansky.github.io/snakegame/</a>
-TicTacToe: https://lukasfridmansky.github.io/tictactoe/
+TicTacToe: <a href="https://lukasfridmansky.github.io/tictactoe/">https://lukasfridmansky.github.io/tictactoe/</a>
