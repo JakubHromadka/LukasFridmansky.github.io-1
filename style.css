@@ -1,0 +1,26 @@
+*::selection {
+    color: #012345;
+    background-color: #fffeee;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 500px;
+    margin: 0 auto;
+    color: #ddd;
+    margin-top: 150px;
+    margin-bottom: 150px;
+}
+
+td,
+th {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #ddd;
+    color: #012345;
+}
