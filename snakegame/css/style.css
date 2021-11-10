@@ -1,0 +1,323 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #1C1C1C;
+    font-family: 'Cabin', sans-serif;
+    font-size: 30px;
+    overscroll-behavior-y: none;
+}
+
+canvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: solid .5px #e5e5e53a;
+    box-shadow: 0px 0px 47px 28px #7e7d7d10;
+}
+
+canvas.active {
+    animation: animation-border .8s infinite;
+}
+
+@keyframes animation-border {
+    0% {
+        border: 3px solid rgba(255, 0, 0, 0);
+    }
+    50% {
+        border: 3px solid rgb(211, 83, 83);
+    }
+    100% {
+        border: 3px solid rgba(255, 0, 0, 0);
+    }
+}
+
+.score {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 15px;
+    margin-left: 15px;
+    font-size: 2rem;
+    display: flex;
+    color: #BCBCBC;
+}
+
+.this-score {
+    display: flex;
+}
+
+.this-score-num {
+    width: 60px;
+    text-align: center;
+}
+
+.best-score {
+    display: flex;
+    margin-left: 15px;
+}
+
+.best-score-num {
+    width: 60px;
+    text-align: center;
+}
+
+.right-top-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 5px;
+    margin-right: 5px;
+    font-size: 2rem;
+    display: flex;
+    color: #BCBCBC;
+}
+
+.restart {
+    cursor: pointer;
+    padding: 10px;
+    transition: color .5s;
+}
+
+.restart:hover {
+    color: #a5a5a5;
+    transition: color .5s;
+}
+
+.icon-settings {
+    cursor: pointer;
+    padding: 10px;
+    transition: color .5s;
+}
+
+.icon-settings:hover {
+    color: #a5a5a5;
+    transition: color .5s;
+}
+
+.settings-menu {
+    width: 100px;
+    height: 111px;
+    font-size: 13px;
+    position: absolute;
+    right: 0;
+    margin-right: 55px;
+}
+
+.settings-menu li {
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    background: #BCBCBC;
+    margin-bottom: 3px;
+}
+
+.settings-menu a {
+    display: block;
+    color: #373943;
+    width: 100%;
+    transition: background .5s;
+}
+
+.settings-menu a:hover,
+a.active {
+    background: #949494;
+    transition: background .5s;
+}
+
+.settings-menu li:first-child a::before {
+    background-color: #BCBCBC;
+    -webkit-mask-image: url('../images/arrow-up.svg');
+    mask-image: url('../images/arrow-up.svg');
+    background-size: 10px 20px;
+    display: inline-block;
+    width: 10px;
+    height: 20px;
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 15px;
+    margin-top: -6px;
+    transition: background-color .5s;
+}
+
+.settings-menu li:first-child a:hover::before,
+.settings-menu li:first-child a.active:before {
+    background-color: #949494;
+    transition: background-color .5s;
+}
+
+.settings-menu li:last-child {
+    margin-bottom: 0;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.help-icon {
+    cursor: pointer;
+    padding: 10px;
+    transition: color .5s;
+}
+
+.help-icon:hover {
+    color: #a5a5a5;
+    transition: color .5s;
+}
+
+.help {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    transform: scale(0);
+    transition: transform .8s;
+    color: #fff;
+}
+
+.help.active {
+    transform: scale(1);
+    transition: transform .8s;
+}
+
+.help-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 550px;
+    height: 400px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.705);
+    box-shadow: 0px 0px 47px 28px rgba(10, 0, 0, 0.274);
+}
+
+.help-title {
+    font-size: 40px;
+    color: #fff;
+    text-transform: uppercase;
+    margin-top: 50px;
+}
+
+.quit-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 10px;
+    margin-top: 5px;
+    padding: 5px;
+    font-size: 25px;
+    cursor: pointer;
+    transition: color .5s;
+}
+
+.quit-icon:hover {
+    color: rgb(211, 207, 207);
+    transition: color .5s;
+}
+
+.help-card p {
+    font-size: 25px;
+    text-align: left;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.game-over-text {
+    display: none;
+}
+
+.game-over-text.active {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 20px;
+    font-size: 40px;
+    color: rgb(211, 83, 83);
+    display: block;
+}
+
+@media only screen and (max-width: 620px) {
+    .game-over-text.active {
+        position: absolute;
+        bottom: 0;
+        top: auto;
+        margin-bottom: 20px;
+        font-size: 40px;
+    }
+    .score,
+    .right-top-panel {
+        font-size: 1.7rem;
+    }
+    .settings-menu {
+        margin-right: 50px;
+    }
+    .help-card {
+        width: 440px;
+        height: 320px;
+    }
+    .help-title {
+        font-size: 32px;
+    }
+    .quit-icon {
+        font-size: 20px;
+    }
+    .help-card p {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .game-over-text.active {
+        font-size: 30px;
+    }
+    .score,
+    .right-top-panel {
+        font-size: 1.4rem;
+    }
+    .settings-menu {
+        margin-right: 41px;
+    }
+    .help-card {
+        width: 330px;
+        height: 240px;
+    }
+    .help-title {
+        font-size: 30px;
+    }
+    .quit-icon {
+        font-size: 15px;
+    }
+    .help-card p {
+        font-size: 15px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .game-over-text.active {
+        font-size: 25px;
+    }
+    .score,
+    .right-top-panel {
+        font-size: 1.2rem;
+    }
+    .settings-menu {
+        margin-right: 37px;
+    }
+}
